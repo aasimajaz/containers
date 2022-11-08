@@ -5,8 +5,10 @@ In this workshop we will through series of steps to install docker and run conta
 
 1.0 - Installing Docker
 
-|# apt-get update	|	/// updating apt sources
-|# apt install -y docker.io|	/// installing docker.io
+|Command		   | 	Details			     |
+|--------------------------|---------------------------------|
+|# apt-get update	   |	/// updating apt sources     |
+|# apt install -y docker.io|	/// installing docker.io     |
 
 
 2.0 - Verify Docker is running
