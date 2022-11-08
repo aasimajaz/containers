@@ -98,8 +98,32 @@ This example show that immutable nature of container. Containers changes are not
 In this section we will build our own webserver using UBI8 baseimage. We will be install httpd server on top of the baseimage; serve a very simple website. This exercise will show how developers will modify
 a base container image in development lifecycle. You will also experince building a new container using Dockerbuild
 
+For this exercise we will download a dockerfile from github and simple html file. 
 
-#dnf install httpd
+Browse to https://github.com/aasimajaz/containers and grab httpd_dockerfile.txt and index.html. 
+
+or 
+
+# wget https://github.com/aasimajaz/containers/httpd_dockerfile.txt -O Dockerfile
+# wget https://github.com/aasimajaz/containers/index.html -O index.html
+
+
+Open the Dockerfile lets review whats happening
+
+
+FROM registry.access.redhat.com/ubi8:8.7-929
+LABEL author: Aasim Ajaz
+RUN dnf install -y httpd procps-ng 
+COPY index.html /var/www/html/
+EXPOSE 80
+ENTRYPOINT ["/usr/sbin/httpd","-D","FOREGROUND"]
+
+
+
+
+
+
+
 
 
 
