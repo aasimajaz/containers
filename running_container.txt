@@ -13,8 +13,10 @@ In this workshop we will through series of steps to install docker and run conta
 
 2.0 - Verify Docker is running
 
-# sudo systemctl status docker   /// getting docker status
-# sudo systemctl restart docker  /// restarting docker
+|Command			| Details			|
+|-------------------------------|-------------------------------|
+|# sudo systemctl status docker   /// getting docker status
+|# sudo systemctl restart docker  /// restarting docker
 
 3.0 - Configure user to run docker 
 
