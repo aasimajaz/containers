@@ -73,13 +73,9 @@ There two ways to interact with a container. First by using <docker attach> comm
 Now you will be connected con01; this is typical container environment. Let try to explore it bit.
 
 # ps -ef 
-
 # uname -a
-
 # ls -l /bin /sbin
-
 # echo "Hello container" > /var/tmp/file1 		/// creating a file1 under /var/tmp with message Hello Container
-
 # cat /var/tmp/file1
 
 Now we will exit the container
@@ -89,31 +85,19 @@ Now we will exit the container
 Now if you look at <docker ps> command you will notice con01 host is missing. When we exited the continer docker removed the container. Now start it again and see if file we created under /var/tmp/file1 exists!
 
 # docker run -d -ti --rm --name con01 alpine:latest
-
 # docker exec con01 ls -l /var/tmp/		/// command will list all file under /var/tmp. You will notice file1 we created earlier is missing
 
 This example show that immutable nature of container. Containers changes are not presistent across restart. To save your data you will need to attach an external storage drivce to the container.
 
 # docker exec con02 sh -c "echo 'hello world' > /apps/file1"		/// we can running docker exec command and insrert 'hello world' in /apps/file1
-
 # cat /containers/apps/file1		///you see see hello world in the file
-
-
-
-
-
- 
-
-
-5.2 - Inspecting container
-
-5.3 - Observe immutable behaviour
 
 
 6.0 - Building a web server 
 
 In this section we will build our own webserver using UBI8 baseimage. We will be install httpd server on top of the baseimage; serve a very simple website. This exercise will show how developers will modify
 a base container image in development lifecycle. You will also experince building a new container using Dockerbuild
+
 
 #dnf install httpd
 
