@@ -1,11 +1,12 @@
 In this workshop we will through series of steps to install docker and run container. We will inspect container and log into container.
+
 /// is for commments
 # is command for shell 
 
 1.0 - Installing Docker
 
-# apt-get update		/// updating apt sources
-# apt install -y docker.io	/// installing docker.io
+|# apt-get update	|	/// updating apt sources
+|# apt install -y docker.io|	/// installing docker.io
 
 
 2.0 - Verify Docker is running
