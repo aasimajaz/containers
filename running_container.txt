@@ -104,19 +104,64 @@ Browse to https://github.com/aasimajaz/containers and grab httpd_dockerfile.txt 
 
 or 
 
-# wget https://github.com/aasimajaz/containers/httpd_dockerfile.txt -O Dockerfile
+# wget https://github.com/aasimajaz/containers/Dockerfile -O Dockerfile
 # wget https://github.com/aasimajaz/containers/index.html -O index.html
 
 
-Open the Dockerfile lets review whats happening
+Review of whats happening. 
+
+FROM registry.access.redhat.com/ubi8:8.7-929		///this is frist line of any Dockerbuild; shows the baseimage for the container
+LABEL author: Aasim Ajaz				/// optional but good to add context to it
+RUN dnf install -y httpd procps-ng 			/// here we are install httpd and proc-ng package on top of the baseimage
+COPY index.html /var/www/html/				/// copying index.html to /var/www/html which will be used httpd to serve the website
+EXPOSE 80						/// port the container will be listening on 80
+ENTRYPOINT ["/usr/sbin/httpd","-D","FOREGROUND"]	/// tell the container what to run once the container is up and runnning
 
 
-FROM registry.access.redhat.com/ubi8:8.7-929
-LABEL author: Aasim Ajaz
-RUN dnf install -y httpd procps-ng 
-COPY index.html /var/www/html/
-EXPOSE 80
-ENTRYPOINT ["/usr/sbin/httpd","-D","FOREGROUND"]
+6.1 Building a container useing Dockerfile
+
+We will now build a container using the Dockefile we exaimed above. 
+
+# docker build -t ubi_httpd:v1 .			///this command will now build a container after download all necessary packages; once created the conntainer image will be called ubi_httpd:v1
+
+
+# docker images 					///you should now see a new image ubi_https:v1 in the list
+
+
+6.2 Running customized webserver
+
+Running the container we built to host our simple website.
+
+# docker run -d --name=web01 -p 80:80 ubi_httpd:v1	///docker will now star a container using new imagea and enable port 80 on it
+
+
+6.3 Test and connecting to webserver
+
+From browser windows you can goto IP address of your linux host. It will take you to the simple we built. Alternatively you can use curl command to browse the website.
+
+
+# curl http://<hostIpAddress>
+
+
+
+you should see the webpage we created. This is end of running container workshop, there are lots of other topics avaliable on how to run container and additional paramater you chose to build a new container.
+
+So far we worked on following
+
+-	Installed Docker
+-	Configure Docker to run container as non-root account
+-	Pull different container images from registies
+-	Ran multiple versions of Container
+-	Connect to a container to see inside of it
+-	Tested immutable nature of container
+-	Build a Dockefile
+-	Built a container
+-	Ran a webserver inside container.
+
+
+
+
+
 
 
 
