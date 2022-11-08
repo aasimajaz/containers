@@ -15,12 +15,19 @@ In this workshop we will through series of steps to install docker and run conta
 
 |Command			| Details			|
 |-------------------------------|-------------------------------|
-|# sudo systemctl status docker   /// getting docker status
-|# sudo systemctl restart docker  /// restarting docker
+|# sudo systemctl status docker |  /// getting docker status	|
+|# sudo systemctl restart docker|  /// restarting docker	|
 
 3.0 - Configure user to run docker 
 
-# sudo usermod user01 -G docker  /// adding user01 to docker group; this will allow a local you to run container withouth root permissions
+|Command                        | Details                       |
+|-------------------------------|-------------------------------|
+|# sudo usermod user01 -G docker|  /// adding user01 to docker	|
+|				|   group; this will allow a 	|
+|				|   local you to run container 	|
+|				|   withouth root permissions	|
+|				|				|
+
 
 4.0 - Running a container with docker.
 
