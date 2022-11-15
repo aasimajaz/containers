@@ -64,8 +64,8 @@ We can use <docker image> command to inspect the images we downloaded. This give
 
 |Command                        | Details                       |
 |-------------------------------|-------------------------------|
-| docker image history alpine:latest		| provides image history; how many layers and what has been added|
-|docker image inspect alphine:latest		| provides image digest, runtime envionrment info|
+|docker image history alpine:latest		| provides image history; how many layers and what has been added|
+|docker image inspect alphine:latest	| provides image digest, runtime envionrment info|
 
  
 5.0 - Running container
@@ -88,12 +88,13 @@ There two ways to interact with a container. First by using <docker attach> comm
 
 Now you will be connected con01; this is typical container environment. Let try to explore it bit.
 
-####\# ps -ef 
-####\# uname -a
-####\# ls -l /bin /sbin
-####\# echo "Hello container" > /var/tmp/file1 		/// creating a file1 under /var/tmp with message Hello Container
-####\# cat /var/tmp/file1
-
+```
+# ps -ef 
+# uname -a
+# ls -l /bin /sbin
+# echo "Hello container" > /var/tmp/file1 		/// creating a file1 under /var/tmp with message Hello Container
+# cat /var/tmp/file1
+```
 Now we will exit the container
 
 #### exit
@@ -115,53 +116,56 @@ This example show that immutable nature of container. Containers changes are not
 
 6.0 - Building a web server 
 
-In this section we will build our own webserver using UBI8 baseimage. We will be install httpd server on top of the baseimage; serve a very simple website. This exercise will show how developers will modify
-a base container image in development lifecycle. You will also experince building a new container using Dockerbuild
+In this section we will build our own webserver using UBI8 baseimage. We will be install httpd server on top of the baseimage; serve a very simple website. This exercise will show how developers will modify a base container image in development lifecycle. You will also experince building a new container using Dockerbuild
 
 For this exercise we will download a dockerfile from github and simple html file. 
 
 Browse to https://github.com/aasimajaz/containers and grab httpd_dockerfile.txt and index.html. 
 
 or 
-
-# wget https://github.com/aasimajaz/containers/Dockerfile -O Dockerfile
-# wget https://github.com/aasimajaz/containers/index.html -O index.html
-
+```
+wget https://github.com/aasimajaz/containers/Dockerfile -O Dockerfile
+wget https://github.com/aasimajaz/containers/index.html -O index.html
+```
 
 Review of whats happening. 
 
+```
 FROM registry.access.redhat.com/ubi8:8.7-929		///this is frist line of any Dockerbuild; shows the baseimage for the container
 LABEL author: Aasim Ajaz				/// optional but good to add context to it
 RUN dnf install -y httpd procps-ng 			/// here we are install httpd and proc-ng package on top of the baseimage
 COPY index.html /var/www/html/				/// copying index.html to /var/www/html which will be used httpd to serve the website
 EXPOSE 80						/// port the container will be listening on 80
 ENTRYPOINT ["/usr/sbin/httpd","-D","FOREGROUND"]	/// tell the container what to run once the container is up and runnning
-
+```
 
 6.1 Building a container useing Dockerfile
 
 We will now build a container using the Dockefile we exaimed above. 
 
-# docker build -t ubi_httpd:v1 .			///this command will now build a container after download all necessary packages; once created the conntainer image will be called ubi_httpd:v1
-
-
-# docker images 					///you should now see a new image ubi_https:v1 in the list
+ 
+|Command                        | Details                       |
+|-------------------------------|-------------------------------|
+| docker build -t ubi_httpd:v1 .	|	this command will follow dockerfile and build a container ubi_httpd:v1 |
+| docker images 				       | you should now see a new image ubi_https:v1 in the list|
 
 
 6.2 Running customized webserver
 
 Running the container we built to host our simple website.
 
-# docker run -d --name=web01 -p 80:80 ubi_httpd:v1	///docker will now star a container using new imagea and enable port 80 on it
+|Command                        | Details                       |
+|-------------------------------|-------------------------------|
+| docker run -d --name=web01 -p 80:80 ubi_httpd:v1	| docker will now start a container using new image and enable port 80 on it|
 
 
 6.3 Test and connecting to webserver
 
 From browser windows you can goto IP address of your linux host. It will take you to the simple we built. Alternatively you can use curl command to browse the website.
 
-
-# curl http://<hostIpAddress>
-
+```
+curl http://<hostIpAddress>
+```
 
 
 you should see the webpage we created. This is end of running container workshop, there are lots of other topics avaliable on how to run container and additional paramater you chose to build a new container.
