@@ -11,20 +11,16 @@ In this workshop we will through series of steps to install docker and run conta
 
 2.0 - Verify Docker is running
 
-|Command			| Details			|
-|-------------------------------|-------------------------------|
-|# sudo systemctl status docker |  /// getting docker status	|
-|# sudo systemctl restart docker|  /// restarting docker	|
+|Command			                   | Details			                   |
+|-----------------------------|------------------------------|
+|sudo systemctl status docker | getting docker status	       |      
+|sudo systemctl restart docker| restarting docker	           |
 
 3.0 - Configure user to run docker 
 
 |Command                        | Details                       |
 |-------------------------------|-------------------------------|
-|# sudo usermod user01 -G docker|  /// adding user01 to docker	|
-|				|   group; this will allow a 	|
-|				|   local you to run container 	|
-|				|   withouth root permissions	|
-|				|				|
+| sudo usermod user01 -G docker | adding user01 to docker	group; this will allow a local you to run container withouth root permissions |  
 
 
 4.0 - Running a container with docker.
@@ -35,23 +31,29 @@ The main command for running docker is <docker> followed by command. e.g to pull
 
 This command will download latest alphine container image from docker hub registry.
 
-
 Lets try to pull multiple images from different internet registries
 
 4.1 - Pulling a alpine image
 
-# docker pull alpine:latest 	/// docker will try to pull alpine images with latest tag
+|Command                        | Details                       |
+|-------------------------------|-------------------------------|
+| docker pull alpine:latest 	   | docker will try to pull alpine images with latest tag |
 
 4.2 - Pull redhat UBI 8 image
 
-# docker pull registry.access.redhat.com/ubi8:8.7-929		/// docker will try to pull ubi8 with tag 8.7-929 from redhat registry
+|Command                        | Details                       |
+|-------------------------------|-------------------------------|
+|  docker pull registry.access.redhat.com/ubi8:8.7-929	 |	docker will try to pull ubi8 with tag 8.7-929 from redhat registry |
 
 
 4.3 - List images 
 
 Now that we have pulled images from internet let review them
 
-# docker images			/// lists all the container images we have avaliable. Since we pulled two before we will see alpine and ubi8:8.7-929.
+|Command                        | Details                       |
+|-------------------------------|-------------------------------|
+| docker images			              | lists all the container images we have avaliable. Since we pulled two before we will see alpine and ubi8:8.7-929.|
+ 
 
 Notice their sizes they are very different. Alpine is known as micro images with few utilities whereas UBI8 has a lot more for mgmt and development. Also UBI images are supported by Redhat for 5 yrs
 and they receive constant security updates.
@@ -60,47 +62,55 @@ and they receive constant security updates.
 
 We can use <docker image> command to inspect the images we downloaded. This give us an idea what has been added to the container images
 
-# docker image history alpine:latest		/// provides image history; how many layers and what has been added
-
-# docker image inspect alphine:latest		/// provides image digest, runtime envionrment info
+|Command                        | Details                       |
+|-------------------------------|-------------------------------|
+| docker image history alpine:latest		| provides image history; how many layers and what has been added|
+|docker image inspect alphine:latest		| provides image digest, runtime envionrment info|
 
  
 5.0 - Running container
 
 So far we have downloded two container images and checked the build history and inspected their configuration. Now we will start container using these images.
-
-# docker run -d -ti --rm  --name con01 alpine:latest
-
-# mkdir -p conatiners/apps; docker run -d -ti --rm  --name con02 -v containers/apps:/apps alphine:latest
+ 
+|Command                        | Details                       |
+|-------------------------------|-------------------------------|
+| docker run -d -ti --rm  --name con01 alpine:latest | starting a container with alpine and calling it con01 |
+| mkdir -p conatiners/apps; ||
+ docker run -d -ti --rm  --name con02 -v containers/apps:/apps alphine:latest| starting a container with apline and calling it con02|
 
 
 5.1 - Connecting to container
 
 There two ways to interact with a container. First by using <docker attach> command which creates an interactive session, and second  is <docker exec> which executes a command inside the container and returns result back
-
-# docker attach con01		/// using docker attach command to start interactive session with con01
+|Command                        | Details                       |
+|-------------------------------|-------------------------------|
+| docker attach con01	          | using docker attach command to start interactive session with con01|
 
 Now you will be connected con01; this is typical container environment. Let try to explore it bit.
 
-# ps -ef 
-# uname -a
-# ls -l /bin /sbin
-# echo "Hello container" > /var/tmp/file1 		/// creating a file1 under /var/tmp with message Hello Container
-# cat /var/tmp/file1
+####\# ps -ef 
+####\# uname -a
+####\# ls -l /bin /sbin
+####\# echo "Hello container" > /var/tmp/file1 		/// creating a file1 under /var/tmp with message Hello Container
+####\# cat /var/tmp/file1
 
 Now we will exit the container
 
-# exit
+#### exit
 
 Now if you look at <docker ps> command you will notice con01 host is missing. When we exited the continer docker removed the container. Now start it again and see if file we created under /var/tmp/file1 exists!
 
-# docker run -d -ti --rm --name con01 alpine:latest
-# docker exec con01 ls -l /var/tmp/		/// command will list all file under /var/tmp. You will notice file1 we created earlier is missing
+|Command                        | Details                       |
+|-------------------------------|-------------------------------|
+| docker run -d -ti --rm --name con01 alpine:latest|
+| docker exec con01 ls -l /var/tmp/		| command will list all file under /var/tmp. You will notice file1 we created earlier is missing|
 
 This example show that immutable nature of container. Containers changes are not presistent across restart. To save your data you will need to attach an external storage drivce to the container.
 
-# docker exec con02 sh -c "echo 'hello world' > /apps/file1"		/// we can running docker exec command and insrert 'hello world' in /apps/file1
-# cat /containers/apps/file1		///you see see hello world in the file
+|Command                        | Details                       |
+|-------------------------------|-------------------------------|
+| docker exec con02 sh -c "echo 'hello world' > /apps/file1"	|	 we can running docker exec command and insrert 'hello world' in /apps/file1 |
+| cat /containers/apps/file1	|you see see hello world in the file |
 
 
 6.0 - Building a web server 
