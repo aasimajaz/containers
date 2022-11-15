@@ -1,7 +1,9 @@
+# Running & Building Container
+
 In this workshop we will through series of steps to install docker and run container. We will inspect container and log into container.
 
 
- 1.0 - Installing Docker
+#### 1.0 - Installing Docker
 
 |Commands                 | Details                  |
 |-------------------------|--------------------------|
@@ -9,21 +11,21 @@ In this workshop we will through series of steps to install docker and run conta
 |apt install -y docker.io |	installing docker.io     |
 
 
-2.0 - Verify Docker is running
+#### 2.0 - Verify Docker is running
 
 |Command			                   | Details			                   |
 |-----------------------------|------------------------------|
 |sudo systemctl status docker | getting docker status	       |      
 |sudo systemctl restart docker| restarting docker	           |
 
-3.0 - Configure user to run docker 
+#### 3.0 - Configure user to run docker 
 
 |Command                        | Details                       |
 |-------------------------------|-------------------------------|
 | sudo usermod user01 -G docker | adding user01 to docker	group; this will allow a local you to run container withouth root permissions |  
 
 
-4.0 - Running a container with docker.
+#### 4.0 - Running a container with docker.
 
 The main command for running docker is <docker> followed by command. e.g to pull a new container image we will run 
 
@@ -68,7 +70,7 @@ We can use <docker image> command to inspect the images we downloaded. This give
 |docker image inspect alphine:latest	| provides image digest, runtime envionrment info|
 
  
-5.0 - Running container
+#### 5.0 - Running container
 
 So far we have downloded two container images and checked the build history and inspected their configuration. Now we will start container using these images.
  
@@ -96,9 +98,9 @@ Now you will be connected con01; this is typical container environment. Let try 
 # cat /var/tmp/file1
 ```
 Now we will exit the container
-
-#### exit
-
+```
+ exit
+```
 Now if you look at <docker ps> command you will notice con01 host is missing. When we exited the continer docker removed the container. Now start it again and see if file we created under /var/tmp/file1 exists!
 
 |Command                        | Details                       |
@@ -114,7 +116,7 @@ This example show that immutable nature of container. Containers changes are not
 | cat /containers/apps/file1	|you see see hello world in the file |
 
 
-6.0 - Building a web server 
+#### 6.0 - Building a web server 
 
 In this section we will build our own webserver using UBI8 baseimage. We will be install httpd server on top of the baseimage; serve a very simple website. This exercise will show how developers will modify a base container image in development lifecycle. You will also experince building a new container using Dockerbuild
 
