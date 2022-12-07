@@ -39,13 +39,13 @@ Lets try to pull multiple images from different internet registries
 
 |Command                        | Details                       |
 |-------------------------------|-------------------------------|
-| docker pull alpine:latest 	   | docker will try to pull alpine images with latest tag |
+| `docker pull alpine:latest`	   | docker will try to pull alpine images with latest tag |
 
 4.2 - Pull redhat UBI 8 image
 
 |Command                        | Details                       |
 |-------------------------------|-------------------------------|
-|  docker pull registry.access.redhat.com/ubi8:8.7-929	 |	docker will try to pull ubi8 with tag 8.7-929 from redhat registry |
+|  `docker pull registry.access.redhat.com/ubi8:8.7-929`	 |	docker will try to pull ubi8 with tag 8.7-929 from redhat registry |
 
 
 4.3 - List images 
@@ -54,7 +54,7 @@ Now that we have pulled images from internet let review them
 
 |Command                        | Details                       |
 |-------------------------------|-------------------------------|
-| docker images			              | lists all the container images we have avaliable. Since we pulled two before we will see alpine and ubi8:8.7-929.|
+| `docker images`			              | lists all the container images we have avaliable. Since we pulled two before we will see alpine and ubi8:8.7-929.|
  
 
 Notice their sizes they are very different. Alpine is known as micro images with few utilities whereas UBI8 has a lot more for mgmt and development. Also UBI images are supported by Redhat for 5 yrs
@@ -66,8 +66,8 @@ We can use <docker image> command to inspect the images we downloaded. This give
 
 |Command                        | Details                       |
 |-------------------------------|-------------------------------|
-|docker image history alpine:latest		| provides image history; how many layers and what has been added|
-|docker image inspect alphine:latest	| provides image digest, runtime envionrment info|
+|`docker image history alpine:latest`		| provides image history; how many layers and what has been added|
+|`docker image inspect alphine:latest`	| provides image digest, runtime envionrment info|
 
  
 #### 5.0 - Running container
@@ -76,9 +76,9 @@ So far we have downloded two container images and checked the build history and 
  
 |Command                        | Details                       |
 |-------------------------------|-------------------------------|
-| docker run -d -ti --rm  --name con01 alpine:latest | starting a container with alpine and calling it con01 |
-| mkdir -p conatiners/apps; ||
- docker run -d -ti --rm  --name con02 -v containers/apps:/apps alphine:latest| starting a container with apline and calling it con02|
+| `docker run -d -ti --rm  --name con01 alpine:latest` | starting a container with alpine and calling it con01 |
+| `mkdir -p conatiners/apps; ||
+ docker run -d -ti --rm  --name con02 -v containers/apps:/apps alphine:latest`| starting a container with apline and calling it con02|
 
 
 5.1 - Connecting to container
@@ -86,7 +86,7 @@ So far we have downloded two container images and checked the build history and 
 There two ways to interact with a container. First by using <docker attach> command which creates an interactive session, and second  is <docker exec> which executes a command inside the container and returns result back
 |Command                        | Details                       |
 |-------------------------------|-------------------------------|
-| docker attach con01	          | using docker attach command to start interactive session with con01|
+| `docker attach con01`          | using docker attach command to start interactive session with con01|
 
 Now you will be connected con01; this is typical container environment. Let try to explore it bit.
 
@@ -105,15 +105,15 @@ Now if you look at <docker ps> command you will notice con01 host is missing. Wh
 
 |Command                        | Details                       |
 |-------------------------------|-------------------------------|
-| docker run -d -ti --rm --name con01 alpine:latest|
-| docker exec con01 ls -l /var/tmp/		| command will list all file under /var/tmp. You will notice file1 we created earlier is missing|
+| `docker run -d -ti --rm --name con01 alpine:latest`|
+| `docker exec con01 ls -l /var/tmp/`		| command will list all file under /var/tmp. You will notice file1 we created earlier is missing|
 
 This example show that immutable nature of container. Containers changes are not presistent across restart. To save your data you will need to attach an external storage drivce to the container.
 
 |Command                        | Details                       |
 |-------------------------------|-------------------------------|
-| docker exec con02 sh -c "echo 'hello world' > /apps/file1"	|	 we can running docker exec command and insrert 'hello world' in /apps/file1 |
-| cat /containers/apps/file1	|you see see hello world in the file |
+| `docker exec con02 sh -c "echo 'hello world' > /apps/file1"`	|	 we can running docker exec command and insrert 'hello world' in /apps/file1 |
+| `cat /containers/apps/file1`	|you see see hello world in the file |
 
 
 #### 6.0 - Building a web server 
