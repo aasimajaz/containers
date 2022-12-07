@@ -88,7 +88,7 @@ There two ways to interact with a container. First by using <docker attach> comm
 |-------------------------------|-------------------------------|
 | `docker attach con01`          | using docker attach command to start interactive session with con01|
 
-Now you will be connected con01; this is typical container environment. Let try to explore it bit.
+You will be connected con01; this is typical container environment. Let try to explore it bit.
 
 ```
 # ps -ef 
@@ -101,7 +101,7 @@ Now we will exit the container
 ```
  exit
 ```
-Now if you look at <docker ps> command you will notice con01 host is missing. When we exited the continer docker removed the container. Now start it again and see if file we created under /var/tmp/file1 exists!
+Run `docker ps` command and you will notice con01 host is missing. When we exited the continer docker removed the container. Now start it again and see if file we created under /var/tmp/file1 exists!
 
 |Command                        | Details                       |
 |-------------------------------|-------------------------------|
@@ -130,12 +130,12 @@ wget https://github.com/aasimajaz/containers/Dockerfile -O Dockerfile
 wget https://github.com/aasimajaz/containers/index.html -O index.html
 ```
 
-Review of whats happening. 
+View the Dockerfile downloaded `cat Dockerfile`. First word are keywords typically in CAPITALS following by commands to run. 
 
 ```
 FROM registry.access.redhat.com/ubi8:8.7-929		///this is frist line of any Dockerbuild; shows the baseimage for the container
 LABEL author: Aasim Ajaz				/// optional but good to add context to it
-RUN dnf install -y httpd procps-ng 			/// here we are install httpd and proc-ng package on top of the baseimage
+RUN dnf install -y httpd procps-ng 			/// installing httpd and proc-ng package on top of the baseimage
 COPY index.html /var/www/html/				/// copying index.html to /var/www/html which will be used httpd to serve the website
 EXPOSE 80						/// port the container will be listening on 80
 ENTRYPOINT ["/usr/sbin/httpd","-D","FOREGROUND"]	/// tell the container what to run once the container is up and runnning
@@ -148,8 +148,8 @@ We will now build a container using the Dockefile we exaimed above.
  
 |Command                        | Details                       |
 |-------------------------------|-------------------------------|
-| docker build -t ubi_httpd:v1 .	|	this command will follow dockerfile and build a container ubi_httpd:v1 |
-| docker images 				       | you should now see a new image ubi_https:v1 in the list|
+| `docker build -t ubi_httpd:v1 .`	|	this command will follow dockerfile and build a container ubi_httpd:v1 |
+| `docker images` 				       | you should now see a new image ubi_https:v1 in the list|
 
 
 6.2 Running customized webserver
@@ -158,18 +158,17 @@ Running the container we built to host our simple website.
 
 |Command                        | Details                       |
 |-------------------------------|-------------------------------|
-| docker run -d --name=web01 -p 80:80 ubi_httpd:v1	| docker will now start a container using new image and enable port 80 on it|
+| `docker run -d --name=web01 -p 80:80 ubi_httpd:v1`	| docker will now start a container using new image and enable port 80 on it|
 
 
 6.3 Test and connecting to webserver
 
-From browser windows you can goto IP address of your linux host. It will take you to the simple we built. Alternatively you can use curl command to browse the website.
+From browser windows you can goto IP address of your linux host. It will take you to the simple website we built. Alternatively you can use curl command to browse the website.
 
 ```
 curl http://<hostIpAddress>
 ```
-
-
+ 
 you should see the webpage we created. This is end of running container workshop, there are lots of other topics avaliable on how to run container and additional paramater you chose to build a new container.
 
 So far we worked on following
@@ -183,19 +182,6 @@ So far we worked on following
 -	Build a Dockefile
 -	Built a container
 -	Ran a webserver inside container.
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
  
