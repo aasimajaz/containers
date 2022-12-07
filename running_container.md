@@ -77,8 +77,8 @@ So far we have downloded two container images and checked the build history and 
 |Command                        | Details                       |
 |-------------------------------|-------------------------------|
 | `docker run -d -ti --rm  --name con01 alpine:latest` | starting a container with alpine and calling it con01 |
-| `mkdir -p conatiners/apps; ||
- docker run -d -ti --rm  --name con02 -v containers/apps:/apps alphine:latest`| starting a container with apline and calling it con02|
+| `mkdir -p conatiners/apps;` ||
+ `docker run -d -ti --rm  --name con02 -v containers/apps:/apps alphine:latest`| starting a container with apline and calling it con02|
 
 
 5.1 - Connecting to container
