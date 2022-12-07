@@ -27,7 +27,7 @@ In this workshop we will through series of steps to install docker and run conta
 
 #### 4.0 - Running a container with docker.
 
-The main command for running docker is <docker> followed by command. e.g to pull a new container image we will run 
+The main command for running docker is <docker> followed by verb. e.g to pull a new container image we will run 
 
 <docker pull alpine:latest>
 
