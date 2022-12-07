@@ -122,7 +122,7 @@ In this section we will build our own webserver using UBI8 baseimage. We will be
 
 For this exercise we will download a dockerfile from github and simple html file. 
 
-Browse to https://github.com/aasimajaz/containers and grab httpd_dockerfile.txt and index.html. 
+Browse to https://github.com/aasimajaz/containers and grab Dockerfile and index.html. 
 
 or 
 ```
