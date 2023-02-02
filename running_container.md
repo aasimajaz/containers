@@ -126,8 +126,8 @@ Browse to https://github.com/aasimajaz/containers and grab Dockerfile and index.
 
 or 
 ```
-wget https://github.com/aasimajaz/containers/Dockerfile -O Dockerfile
-wget https://github.com/aasimajaz/containers/index.html -O index.html
+wget https://github.com/aasimajaz/containers/raw/main/Dockerfile -O Dockerfile
+wget https://github.com/aasimajaz/containers/raw/main/index.html -O index.html
 ```
 
 View the Dockerfile downloaded `cat Dockerfile`. First word are keywords typically in CAPITALS following by commands to run. 
