@@ -31,7 +31,7 @@ The main command for running docker is `docker` followed by verb. e.g to pull a 
 
 `docker pull alpine:latest`
 
-This command will download latest alphine container image from docker hub registry.
+This command will download latest alpine container image from docker hub registry.
 
 Lets try to pull multiple images from different internet registries
 
@@ -67,7 +67,7 @@ We can use <docker image> command to inspect the images we downloaded. This give
 |Command                        | Details                       |
 |-------------------------------|-------------------------------|
 |`docker image history alpine:latest`		| provides image history; how many layers and what has been added|
-|`docker image inspect alphine:latest`	| provides image digest, runtime envionrment info|
+|`docker image inspect alpine:latest`	| provides image digest, runtime envionrment info|
 
  
 #### 5.0 - Running container
@@ -78,7 +78,7 @@ So far we have downloded two container images and checked the build history and 
 |-------------------------------|-------------------------------|
 | `docker run -d -ti --rm  --name con01 alpine:latest` | starting a container with alpine and calling it con01 |
 | `mkdir -p conatiners/apps;` ||
- `docker run -d -ti --rm  --name con02 -v containers/apps:/apps alphine:latest`| starting a container with apline and calling it con02|
+ `docker run -d -ti --rm  --name con02 -v containers/apps:/apps alpine:latest`| starting a container with apline and calling it con02|
 
 
 5.1 - Connecting to container
