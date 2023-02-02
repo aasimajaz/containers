@@ -78,7 +78,7 @@ So far we have downloded two container images and checked the build history and 
 |-------------------------------|-------------------------------|
 | `docker run -d -ti --rm  --name con01 alpine:latest` | starting a container with alpine and calling it con01 |
 | `mkdir -p conatiners/apps;` ||
- `docker run -d -ti --rm  --name con02 -v containers/apps:/apps alpine:latest`| starting a container with apline and calling it con02|
+ `docker run -d -ti --rm  --name con02 -v ~/containers/apps:/apps alpine:latest`| starting a container with apline and calling it con02|
 
 
 5.1 - Connecting to container
@@ -113,7 +113,7 @@ This example show that immutable nature of container. Containers changes are not
 |Command                        | Details                       |
 |-------------------------------|-------------------------------|
 | `docker exec con02 sh -c "echo 'hello world' > /apps/file1"`	|	 we can running docker exec command and insrert 'hello world' in /apps/file1 |
-| `cat /containers/apps/file1`	|you see see hello world in the file |
+| `cat ~/containers/apps/file1`	|you see see hello world in the file |
 
 
 #### 6.0 - Building a web server 
